@@ -1,6 +1,7 @@
 package Nodos;
 
 import Expresiones.Expresion;
+import TiposDeDato.TipoDato;
 
 public class Para extends Nodo
 {
@@ -33,7 +34,48 @@ public class Para extends Nodo
     @Override
     public void validaTipos()
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.asignacion.validaTipos();
+        this.expresionLogica.validaTipos();
+        this.incremento.validaTipos();
+        this.bloque.validaTipos();
+        
+        tipoDato = TipoDato.ERROR;
+        
+        if(asignacion.tipoDato != tipoDato)
+        {
+            if (expresionLogica.tipoDato == TipoDato.ENTERO)
+            {
+                if(incremento.tipoDato != tipoDato)
+                {
+                    if(bloque.tipoDato == TipoDato.VACIO)
+                    {
+                        tipoDato = TipoDato.VACIO;
+                    }
+                    else
+                    {
+                       this.setError("Error de bloque for "+bloque.simbolo); 
+                    }
+                }
+                else
+                {
+                    this.setError("Error en el incremento "+incremento.simbolo);
+                }
+            }
+            else
+            {
+                this.setError("Error en la expresion logica "+expresionLogica.simbolo);
+            }
+        }
+        else
+        {
+            this.setError("Error de tipo en la asignacion "+asignacion.simbolo);
+        }
+        
+        if(siguiente != null)
+        {
+            this.siguiente.validaTipos();
+        }
     }
 
     @Override

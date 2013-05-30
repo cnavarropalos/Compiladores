@@ -11,7 +11,22 @@ public class Tipo extends Nodo
     @Override
     public void validaTipos()
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.tipoDato = tipoDato.ERROR;
+        
+        if(this.simbolo.equalsIgnoreCase("int"))
+        {
+            this.tipoDato = tipoDato.ENTERO;
+        }
+        else if(this.simbolo.equalsIgnoreCase("float"))
+        {
+            this.tipoDato = tipoDato.REAL;
+        }
+        
+        if(siguiente != null)
+        {
+            this.siguiente.validaTipos();
+        }
     }
 
     @Override

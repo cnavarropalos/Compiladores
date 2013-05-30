@@ -1,5 +1,6 @@
 package Nodos;
 
+import Tabla_simbolos.TabSim;
 import TiposDeDato.TipoDato;
 
 public abstract class Nodo
@@ -9,7 +10,9 @@ public abstract class Nodo
     protected String simbolo;
     protected Nodo siguiente;
     protected TipoDato tipoDato;
-
+    protected String errores = "";
+    protected TabSim tabla_simbolos = new TabSim();
+    
     public Nodo()
     {
     }
@@ -38,5 +41,9 @@ public abstract class Nodo
         }
 
         return "";
+    }
+    
+    public void setError(String error){
+        errores += "\n"+error;
     }
 }

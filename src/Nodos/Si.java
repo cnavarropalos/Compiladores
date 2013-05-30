@@ -1,6 +1,7 @@
 package Nodos;
 
 import Expresiones.Expresion;
+import TiposDeDato.TipoDato;
 
 public class Si extends Nodo
 {
@@ -28,7 +29,39 @@ public class Si extends Nodo
     @Override
     public void validaTipos()
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.expresion.validaTipos();
+        this.bloque.validaTipos();
+        this.otro.validaTipos();
+        
+        
+            if (expresion.tipoDato == TipoDato.ENTERO)
+            {
+                if(bloque.tipoDato == TipoDato.VACIO)
+                {
+                    if(otro.tipoDato == TipoDato.VACIO)
+                    {
+                        tipoDato = TipoDato.VACIO;
+                    }
+                    else
+                    {
+                       this.setError("Error en el else "+otro.simbolo); 
+                    }
+                }
+                else
+                {
+                    this.setError("Error de bloque if "+bloque.simbolo);
+                }
+            }
+            else
+            {
+                this.setError("Error en la expresion logica "+expresion.simbolo);
+            }
+        
+        if(siguiente != null)
+        {
+            this.siguiente.validaTipos();
+        }
     }
 
     @Override
