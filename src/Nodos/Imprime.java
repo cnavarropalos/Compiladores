@@ -1,6 +1,7 @@
 package Nodos;
 
 import Expresiones.Expresion;
+import TiposDeDato.TipoDato;
 
 public class Imprime extends Nodo
 {
@@ -22,7 +23,20 @@ public class Imprime extends Nodo
     @Override
     public void validaTipos()
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.expresion.validaTipos();
+        
+        if(this.expresion.tipoDato != TipoDato.VACIO){
+            this.tipoDato = tipoDato.ERROR;
+            this.setError("Error en la expresion de "+this.simbolo);
+        }
+        else{
+            this.tipoDato = this.expresion.tipoDato;
+        }
+        
+        if(this.siguiente != null){
+            this.siguiente.validaTipos();
+        }
     }
 
     @Override

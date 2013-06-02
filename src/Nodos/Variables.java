@@ -3,6 +3,7 @@ package Nodos;
 import Ejemplos.ArbolSintactico;
 import Expresiones.ID;
 import Tabla_simbolos.Elemento;
+import TiposDeDato.TipoDato;
 
 public class Variables extends Nodo
 {
@@ -30,12 +31,10 @@ public class Variables extends Nodo
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         
         this.tipo.validaTipos();
-        
-        tipoDato = tipo.tipoDato;
+        this.tipoDato = tipo.tipoDato;
         
         Elemento variable;
         Nodo auxiliar;
-        
         
         auxiliar = identificador;
         while (auxiliar != null)
@@ -43,6 +42,7 @@ public class Variables extends Nodo
             variable = tabla_simbolos.getElement(auxiliar.simbolo);
             if(variable != null)
             {
+                this.tipoDato = TipoDato.ERROR;
                 setError("Variable ya declarada "+auxiliar.simbolo);
             }
             else

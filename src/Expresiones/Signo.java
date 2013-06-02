@@ -1,5 +1,7 @@
 package Expresiones;
 
+import TiposDeDato.TipoDato;
+
 public class Signo extends Expresion
 {
 
@@ -11,7 +13,13 @@ public class Signo extends Expresion
     @Override
     public void validaTipos()
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.izquierdo.validaTipos();
+        
+        this.tipoDato = izquierdo.tipoDato;
+        if(this.tipoDato  == TipoDato.ERROR){
+            this.setError("Signo invalido "+this.simbolo);
+        }
     }
 
     @Override

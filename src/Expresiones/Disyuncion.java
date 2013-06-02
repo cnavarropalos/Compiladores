@@ -11,7 +11,19 @@ public class Disyuncion extends Expresion
     @Override
     public void validaTipos()
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.izquierdo.validaTipos();
+        this.derecho.validaTipos();
+        
+        if((izquierdo.tipoDato == derecho.tipoDato) && (izquierdo.tipoDato == tipoDato.ENTERO))
+        {
+            this.tipoDato = izquierdo.tipoDato;
+        }
+        else
+        {
+            this.tipoDato = tipoDato.ERROR;
+            this.setError("Error en la expresion "+this.simbolo);
+        }
     }
 
     @Override

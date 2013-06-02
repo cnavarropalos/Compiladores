@@ -40,36 +40,30 @@ public class Para extends Nodo
         this.incremento.validaTipos();
         this.bloque.validaTipos();
         
-        tipoDato = TipoDato.ERROR;
-        
-        if(asignacion.tipoDato != tipoDato)
-        {
-            if (expresionLogica.tipoDato == TipoDato.ENTERO)
+        if(asignacion.tipoDato != tipoDato && expresionLogica.tipoDato == TipoDato.ENTERO
+           && incremento.tipoDato != tipoDato && bloque.tipoDato == TipoDato.VACIO){
+            
+            tipoDato = TipoDato.VACIO;
+        }
+        else{
+            tipoDato = TipoDato.ERROR;
+            
+            if(asignacion.tipoDato != tipoDato)
             {
-                if(incremento.tipoDato != tipoDato)
-                {
-                    if(bloque.tipoDato == TipoDato.VACIO)
-                    {
-                        tipoDato = TipoDato.VACIO;
-                    }
-                    else
-                    {
-                       this.setError("Error de bloque for "+bloque.simbolo); 
-                    }
-                }
-                else
-                {
-                    this.setError("Error en el incremento "+incremento.simbolo);
-                }
+                this.setError("Error de tipo en la asignacion "+asignacion.simbolo);
             }
-            else
+            if (expresionLogica.tipoDato == TipoDato.ENTERO)
             {
                 this.setError("Error en la expresion logica "+expresionLogica.simbolo);
             }
-        }
-        else
-        {
-            this.setError("Error de tipo en la asignacion "+asignacion.simbolo);
+            if(incremento.tipoDato != tipoDato)
+            {
+                this.setError("Error en el incremento "+incremento.simbolo);
+            }
+            if(bloque.tipoDato == TipoDato.VACIO)
+            {
+                this.setError("Error de bloque for "+bloque.simbolo); 
+            }
         }
         
         if(siguiente != null)

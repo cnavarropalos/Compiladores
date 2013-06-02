@@ -9,9 +9,9 @@ public abstract class Nodo
     public static int contadorEtiquetas = 0;
     protected String simbolo;
     protected Nodo siguiente;
-    protected TipoDato tipoDato;
-    protected String errores = "";
-    protected TabSim tabla_simbolos = new TabSim();
+    public TipoDato tipoDato;
+    protected static String errores = "";
+    protected static TabSim tabla_simbolos = new TabSim();
     
     public Nodo()
     {
@@ -45,5 +45,9 @@ public abstract class Nodo
     
     public void setError(String error){
         errores += "\n"+error;
+    }
+    
+    public String getErrors(){
+        return errores;
     }
 }

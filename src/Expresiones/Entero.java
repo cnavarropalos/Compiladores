@@ -1,5 +1,7 @@
 package Expresiones;
 
+import TiposDeDato.TipoDato;
+
 public class Entero extends Expresion
 {
 
@@ -12,7 +14,8 @@ public class Entero extends Expresion
     @Override
     public void validaTipos()
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.tipoDato = TipoDato.ENTERO;
     }
 
     @Override

@@ -32,31 +32,39 @@ public class Si extends Nodo
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         this.expresion.validaTipos();
         this.bloque.validaTipos();
-        this.otro.validaTipos();
+        if(otro != null){
+            this.otro.validaTipos();
+        }
         
-        
-            if (expresion.tipoDato == TipoDato.ENTERO)
-            {
-                if(bloque.tipoDato == TipoDato.VACIO)
-                {
-                    if(otro.tipoDato == TipoDato.VACIO)
-                    {
-                        tipoDato = TipoDato.VACIO;
-                    }
-                    else
-                    {
-                       this.setError("Error en el else "+otro.simbolo); 
-                    }
-                }
-                else
-                {
-                    this.setError("Error de bloque if "+bloque.simbolo);
+        if(expresion.tipoDato == TipoDato.ENTERO && bloque.tipoDato == TipoDato.VACIO){
+            if(otro != null){
+                if(otro.tipoDato == TipoDato.VACIO){
+                    tipoDato = TipoDato.VACIO;
                 }
             }
-            else
+            else{
+                tipoDato = TipoDato.VACIO;
+            }
+            
+        }
+        else{
+            this.tipoDato = TipoDato.ERROR;
+            
+            if (expresion.tipoDato == TipoDato.ENTERO)
             {
                 this.setError("Error en la expresion logica "+expresion.simbolo);
             }
+            if(bloque.tipoDato == TipoDato.VACIO)
+            {
+                this.setError("Error de bloque if "+bloque.simbolo);
+            }
+            if(otro != null){
+                if(otro.tipoDato == TipoDato.VACIO)
+                {
+                    this.setError("Error en el else "+otro.simbolo);
+                }
+            }
+        }
         
         if(siguiente != null)
         {

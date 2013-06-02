@@ -3,6 +3,7 @@ package GUI.Paneles;
 import Ejemplos.*;
 import GUI.VentanasEmergentes.*;
 import Nodos.Nodo;
+import TiposDeDato.TipoDato;
 import java.awt.event.*;
 import java.io.*;
 import javax.swing.*;
@@ -23,6 +24,13 @@ public class PanelCodigoObjeto extends javax.swing.JPanel implements ActionListe
     private void construyeCodigoObjeto()
     {
         String codigoObjeto = arbolSintactico.generaCodigo();
+        
+        //prueba 
+        arbolSintactico.validaTipos();
+        System.out.println(arbolSintactico.tipoDato);
+        if(arbolSintactico.tipoDato == TipoDato.ERROR)
+             System.out.println(arbolSintactico.getErrors());
+        
         areaCodigoObjeto.append(ArbolSintactico.cabeceraCodigoObjeto);
         areaCodigoObjeto.append(ArbolSintactico.apartadosData);
         areaCodigoObjeto.append(ArbolSintactico.codigoObjetoVariables);

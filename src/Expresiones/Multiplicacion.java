@@ -1,5 +1,7 @@
 package Expresiones;
 
+import TiposDeDato.TipoDato;
+
 public class Multiplicacion extends Expresion
 {
 
@@ -11,7 +13,18 @@ public class Multiplicacion extends Expresion
     @Override
     public void validaTipos()
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        izquierdo.validaTipos();
+        derecho.validaTipos();
+        
+        if(izquierdo.tipoDato == derecho.tipoDato && 
+           izquierdo.tipoDato != tipoDato.VACIO){
+            this.tipoDato = this.izquierdo.tipoDato;
+        }
+        else{
+            this.tipoDato = TipoDato.ERROR;
+            this.setError("la expresion "+this.simbolo+" es incompatible");
+        }
     }
 
     @Override

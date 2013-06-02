@@ -2,6 +2,7 @@ package Nodos;
 
 import Expresiones.ID;
 import Expresiones.Expresion;
+import TiposDeDato.TipoDato;
 
 public class Asignacion extends Nodo
 {
@@ -26,7 +27,21 @@ public class Asignacion extends Nodo
     @Override
     public void validaTipos()
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.identificador.validaTipos();
+        this.expresion.validaTipos();
+        
+        if(this.identificador.tipoDato == this.expresion.tipoDato){
+            this.tipoDato = this.identificador.tipoDato;
+        }
+        else{
+            this.tipoDato = TipoDato.ERROR;
+            this.setError("Tipos incompatibles "+this.identificador.simbolo+" "+this.expresion.simbolo);
+        }
+        
+        if(this.siguiente != null){
+            this.siguiente.validaTipos();
+        }
     }
 
     @Override

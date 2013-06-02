@@ -1,5 +1,8 @@
 package Expresiones;
 
+import Tabla_simbolos.Elemento;
+import TiposDeDato.TipoDato;
+
 public class ID extends Expresion
 {
 
@@ -18,7 +21,15 @@ public class ID extends Expresion
     @Override
     public void validaTipos()
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Elemento identificador = this.tabla_simbolos.getElement(simbolo);
+        if(identificador != null){
+            tipoDato = identificador.getTipo();
+        }
+        else{
+            this.setError("Variable no definida "+this.simbolo);
+            tipoDato = TipoDato.ERROR;
+        }
     }
 
     @Override
